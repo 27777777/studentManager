@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+<link href="/stylesheets/snow.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/stylesheets/style.css" rel="stylesheet" type="text/css" media="all" />
+<script src="/javascripts/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div class="snow-container">
+			  <div class="snow foreground"></div>
+			  <div class="snow foreground layered"></div>
+			  <div class="snow middleground"></div>
+			  <div class="snow middleground layered"></div>
+			  <div class="snow background"></div>
+			  <div class="snow background layered"></div>
+			</div>
+
+<div class="top-buttons-agileinfo">
+<a href="/">登录</a><a href="/register" class="active">注册</a>
+</div>
+<h1>学生后台管理系统</h1>
+<div class="main-agileits">
+		<div class="form-w3-agile">
+			<h2 class="sub-agileits-w3layouts">注册</h2>
+			<form>
+					<input type="text" name="Username" placeholder="用户名" class="username"/>
+					<input type="password" name="Password" placeholder="密码" class="psw"/>
+					<input type="password" name="Password" placeholder="确认密码" class="confirm"/>
+				<div class="submit-w3l">
+					<input type="button" value="注册">
+				</div>
+			</form>
+		</div>
+		</div>
+	<div class="copyright w3-agile">
+		<p> © 2017 </p>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$("input[type=button]").click(function(){
+				if($(".username").val()==""){
+					alert("请输入用户名");
+					return;
+				}
+				if($(".psw").val()==""){
+					alert("请输入密码");
+					return;
+				}
+				if($(".confirm").val()==""){
+					alert("请确认密码");
+					return;
+				}
+				if($(".confirm").val()!=$(".psw").val()){
+					alert("两次输入的密码不一致");
+					return;
+				}
+				var reg2=/^[\$\.a-zA-Z0-9_-]{5,20}$/;//密码
+				if(!reg2.test($(".psw").val())){
+					alert("密码长度为5到20位，不能包含特殊字符");
+					return;
+				}
+				
+				$.ajax({
+					type:"post",
+					url:"/users/register",
+					async:true,
+					data:{username:$(".username").val(),psw:$(".psw").val()},
+					success:function(data){
+						if(data==1){
+							alert("注册成功！")
+							location.href='/';
+						}else if(data==0){
+							alert("用户名已存在！");
+						}else{
+							alert("注册失败，请重新注册");
+							location.reload();
+						}
+					}
+				});
+			})
+		})
+	</script>
+</body>
+</html>

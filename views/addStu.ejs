@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="/stylesheets/pintuer.css">
+<link rel="stylesheet" href="/stylesheets/admin.css">
+<script src="/javascripts/jquery-1.11.0.js"></script>
+<script src="/javascripts/pintuer.js"></script>
+<script src="/javascripts/jquery.form.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span> 添加学生</strong></div>
+  <div class="body-content">
+    <form method="post" class="form-x" action="/users/stuMessage" enctype="multipart/form-data">  
+    <!--<form class="form-x">-->  
+      <div class="form-group">
+        <div class="label">
+          <label>学号：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="" name="stuID" data-validate="required:请输入学号" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>姓名：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="" name="stuName" data-validate="required:请输入姓名" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>电话：</label>
+        </div>
+        <div class="field">
+          <input type="tel" class="input w50" value="" name="stuTel" data-validate="required:请输入电话" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>邮箱：</label>
+        </div>
+        <div class="field">
+          <input type="email" class="input w50" value="" name="stuEmail" data-validate="required:请输入邮箱" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>专业：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="" name="stuSpe" data-validate="required:请输入专业" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>照片：</label>
+        </div>
+        <div class="field">
+          <input type="file"  id="image1" name="pic" value="+ 浏览上传"  style="margin:5px 0 0"/>
+        </div>
+      </div>     
+      
+      <div class="form-group">
+        <div class="label">
+          <label>地址：</label>
+        </div>
+        <div class="field">
+          <textarea class="input" name="stuAddress" style=" height:90px;"></textarea>
+          <div class="tips"></div>
+        </div>
+      </div>
+     
+      <div class="form-group">
+        <div class="label">
+          <label></label>
+        </div>
+        <div class="field">
+          <button class="button bg-main icon-check-square-o" type="button"> 提交</button>
+        </div>
+      </div>
+    </form>
+    
+    
+  </div>
+</div>
+<script type="text/javascript">
+	$("button").click(function(){
+		$("input").trigger("blur");
+		if($(".input-help").length>0){
+			return;
+		}
+		if($("#image1").val()==""){
+			alert("请选择照片！");
+			return;
+		}
+		if($("textarea").val()==""){
+			alert("请输入地址！");
+			return;
+		}
+		var reg3=/^[\w\-\.]+\@[\w]+\.[\w]{2,4}$/;//邮箱
+		var reg4=/^((13[0-9])|(15[^4,\D])|(17[^4,\D])|(18[0-9]))\d{8}$/;//手机
+		if(!reg4.test($("input[type=tel]").val())){
+			alert("手机格式不正确！请检查");
+			return;
+		}
+		if(!reg3.test($("input[type=email]").val())){
+			alert("邮箱格式不正确！请检查");
+			return;
+		}
+		
+		$('.form-x').ajaxSubmit({
+			success:function(data){
+				if(data==0){
+					alert("学号已存在");
+				}
+				if(data==1){
+					alert("提交成功！");
+					location.reload();
+				}
+				if(data==2){
+					alert("照片格式不正确，请重新选择");
+				}
+			}
+		});
+	})
+</script>
+</body>
+</html>

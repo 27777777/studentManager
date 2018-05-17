@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="/stylesheets/pintuer.css">
+<link rel="stylesheet" href="/stylesheets/admin.css">
+<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css"/>
+<script src="/javascripts/jquery-1.11.0.js"></script>
+<script src="/javascripts/pintuer.js"></script>
+<style type="text/css">
+	.panel{
+		border: solid 1px #ddd;
+	}
+	.body-content{
+		padding: 20px 100px;
+	}
+	.photo{
+		float: left;
+		width: 20%;
+		margin-right: 5%;
+	}
+	.photo img{
+		border: 1px solid #CCC;
+		padding: 10px;
+		width: 220px;
+		height: 300px;
+	}
+	table.table{
+		width: 45%;
+		float: left;
+		font-size: 16px;
+	}
+	.button-group{
+		float: left;
+		margin-left: 3%;
+	}
+</style>
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head"><strong><span class="icon-pencil-square-o"></span> 学生详情</strong></div>
+  <div class="body-content">
+  	<div class="photo">
+  		<img src="/stu/<%- result.imgSrc %>"/>
+  	</div>
+  	<table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th scope="row">学号</th>
+            <td><%- result.stuID %></td>
+          </tr>
+          <tr>
+            <th scope="row">姓名</th>
+            <td><%- result.stuName %></td>
+          </tr>
+          <tr>
+            <th scope="row">电话</th>
+            <td><%- result.stuTel %></td>
+          </tr>
+          <tr>
+            <th scope="row">邮箱</th>
+            <td><%- result.stuEmail %></td>
+          </tr>
+          <tr>
+            <th scope="row">专业</th>
+            <td><%- result.stuSpe %></td>
+          </tr>
+          <tr>
+            <th scope="row">地址</th>
+            <td><%- result.stuAddress %></td>
+          </tr>
+        </tbody>
+      </table>
+  	
+  	<div class="button-group"><a class="button border-yellow" href="/change?id=<%- result.id %>"><span class="icon-edit"></span> 修改</a></div>
+  </div>
+</div>
+</body>
+</html>

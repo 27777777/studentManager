@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>学生后台管理</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="application/x-javascript">
+			addEventListener("load", function() {
+				setTimeout(hideURLbar, 0);
+			}, false);
+
+			function hideURLbar() {
+				window.scrollTo(0, 1);
+			}
+		</script>
+		<link href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+		<link href="/stylesheets/snow.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="/stylesheets/style.css" rel="stylesheet" type="text/css" media="all" />
+		<script src="/javascripts/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="snow-container">
+			<div class="snow foreground"></div>
+			<div class="snow foreground layered"></div>
+			<div class="snow middleground"></div>
+			<div class="snow middleground layered"></div>
+			<div class="snow background"></div>
+			<div class="snow background layered"></div>
+		</div>
+
+		<div class="top-buttons-agileinfo">
+			<a href="/" class="active">登录</a>
+			<a href="/register">注册</a>
+		</div>
+		<h1>学生后台管理系统</h1>
+		<div class="main-agileits">
+			<div class="form-w3-agile">
+				<h2 class="sub-agileits-w3layouts">登录</h2>
+				<form>
+					<input type="text" name="Username" placeholder="用户" class="username" />
+					<input type="password" name="Password" placeholder="密码" class="psw" />
+					<div class="submit-w3l">
+						<input type="button" value="登录">
+					</div>
+					<p class="p-bottom-w3ls">
+						<a href="/register">点击注册</a>如果你没有一个帐户。 .
+					</p>
+				</form>
+			</div>
+		</div>
+		<div class="copyright w3-agile">
+			<p> © 2017</p>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				
+				$(".username,.psw").keydown(function(e){
+					if(e.keyCode==13){
+						send();
+					}
+				})
+				
+				$("input[type=button]").click(function() {
+					send();
+				})
+				
+				
+				function send(){
+					if($(".username").val() == "") {
+						alert("请输入用户名");
+						return;
+					}
+					if($(".psw").val() == "") {
+						alert("请输入密码");
+						return;
+					}
+
+					$.ajax({
+						type: "post",
+						url: "/users/login",
+						async: true,
+						data: {
+							username: $(".username").val(),
+							psw: $(".psw").val()
+						},
+						success: function(data) {
+							if(data == 1) {
+								alert("登录成功");
+								location.href = "/home";
+							} else {
+								alert("账号密码不匹配，请重新登录");
+								location.reload();
+							}
+						}
+					});
+					
+				}
+				
+			})
+		</script>
+	</body>
+
+</html>
